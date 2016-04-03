@@ -5,7 +5,8 @@ authors = ["Joe Wilm <joe@jwilm.com>"]
 license = "MIT or Apache-2.0"
 description = "PagerDuty API Client"
 readme = "README.md"
-repository = "https://github.com/jwilm/pagerduty"
+repository = "https://github.com/jwilm/pagerduty-rs"
+documentation = "https://jwilm.github.io/pagerduty-rs/pagerduty/"
 
 [dependencies]
 hyper = "0.8"

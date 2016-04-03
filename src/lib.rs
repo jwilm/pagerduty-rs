@@ -1,6 +1,6 @@
 //! Unofficial PagerDuty API Client
 //!
-//! The code for this project resides at https://github.com/jwilm/pagerduty.
+//! The code for this project resides at https://github.com/jwilm/pagerduty-rs.
 //!
 //! This is an early version of the PagerDuty API Client. Many of the APIs are not yet implemented
 //! in this client. The initial features implemented are those necessary to create new incidents
