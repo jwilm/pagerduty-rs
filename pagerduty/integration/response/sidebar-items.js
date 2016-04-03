@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BadRequest","If the request is invalid, PagerDuty will respond with HTTP code 400 and this object"],["Success","If the request is well-formatted, PagerDuty will respond with HTTP code 200 and this object."]]});

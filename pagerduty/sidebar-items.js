@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["integration","Integration API"]],"struct":[["AuthToken","A token used to authorize requests to PagerDuty."]]});

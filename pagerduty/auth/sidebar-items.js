@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AuthToken","A token used to authorize requests to PagerDuty."]]});

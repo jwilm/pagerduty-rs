@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["response","Response types from the integration API"]],"struct":[["Context","An informational asset attached to the incident"],["ResolveEvent","Cause the referenced incident to enter the resolved state."],["TriggerEvent","Event to report a new or ongoing problem."]]});

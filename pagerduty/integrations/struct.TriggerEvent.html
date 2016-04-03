@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `TriggerEvent` struct in crate `pagerduty`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, TriggerEvent">
+
+    <title>pagerduty::integrations::TriggerEvent - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>pagerduty</a>::<wbr><a href='index.html'>integrations</a></p><script>window.sidebarCurrent = {name: 'TriggerEvent', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>pagerduty</a>::<wbr><a href='index.html'>integrations</a>::<wbr><a class='struct' href=''>TriggerEvent</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-15' class='srclink' href='../../src/pagerduty/integrations.rs.html#62-83' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct TriggerEvent&lt;'a&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>Event to report a new or ongoing problem.</p>
+
+<p>When PagerDuty receives a trigger event, it will either open a new incident, or add
+a new trigger log entry to an existing incident, depending on the provided incident_key.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../pagerduty/integrations/struct.TriggerEvent.html' title='pagerduty::integrations::TriggerEvent'>TriggerEvent</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;S&gt;(service_key: S, description: S) -&gt; Self <span class='where'>where S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.Into.html' title='core::convert::Into'>Into</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'a, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;</span></code></h4>
+<div class='docblock'><p>Create a new trigger event payload</p>
+
+<p>service_key: The GUID of one of your &quot;Generic API&quot; services. This is the &quot;service key&quot;
+listed on a Generic API&#39;s service detail page.</p>
+
+<p>description: A short description of the problem that led to this trigger. This field (or a
+truncated version) will be used when generating phone calls, SMS messages and alert emails.
+It will also appear on the incidents tables in the PagerDuty UI. The maximum length is 1024
+characters.</p>
+</div><h4 id='method.set_incident_key' class='method'><code>fn <a href='#method.set_incident_key' class='fnname'>set_incident_key</a>&lt;S&gt;(self, incident_key: S) -&gt; Self <span class='where'>where S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.Into.html' title='core::convert::Into'>Into</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'a, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;</span></code></h4>
+<div class='docblock'><p>Set incident_key</p>
+
+<p>Identifies the incident to which this trigger event should be applied. If there&#39;s no open
+(i.e. unresolved) incident with this key, a new one will be created. If there&#39;s already an
+open incident with a matching key, this event will be appended to that incident&#39;s log. The
+event key provides an easy way to &quot;de-dup&quot; problem reports.</p>
+</div><h4 id='method.set_client' class='method'><code>fn <a href='#method.set_client' class='fnname'>set_client</a>&lt;S&gt;(self, client: S) -&gt; Self <span class='where'>where S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.Into.html' title='core::convert::Into'>Into</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'a, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;</span></code></h4>
+<div class='docblock'><p>Set event&#39;s client</p>
+
+<p>The name of the monitoring client that is triggering this event.</p>
+</div><h4 id='method.set_client_url' class='method'><code>fn <a href='#method.set_client_url' class='fnname'>set_client_url</a>&lt;S&gt;(self, client_url: S) -&gt; Self <span class='where'>where S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.Into.html' title='core::convert::Into'>Into</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'a, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;</span></code></h4>
+<div class='docblock'><p>Set event&#39;s client_url</p>
+
+<p>The URL of the monitoring client that is triggering this event.</p>
+</div><h4 id='method.set_details' class='method'><code>fn <a href='#method.set_details' class='fnname'>set_details</a>&lt;T: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt;(self, details: &amp;T) -&gt; Self <span class='where'>where T: <a class='trait' href='../../serde/ser/trait.Serialize.html' title='serde::ser::Serialize'>Serialize</a></span></code></h4>
+<div class='docblock'><p>Set event details</p>
+
+<p>An arbitrary JSON object containing any data you&#39;d like included in the incident log.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='comment'>// Extra data to be included with the event. Anything that implements</span>
+<span class='comment'>// Serialize can be passed to `set_details`.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Serialize</span>)]</span>
+<span class='kw'>struct</span> <span class='ident'>Details</span> {
+    <span class='ident'>what</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>,
+    <span class='ident'>count</span>: <span class='ident'>i32</span>,
+}
+
+<span class='comment'>// Create a trigger event and include custom data</span>
+<span class='ident'>TriggerEvent</span>::<span class='ident'>new</span>(<span class='string'>&quot;service_key&quot;</span>, <span class='string'>&quot;event description&quot;</span>)
+    .<span class='ident'>set_details</span>(<span class='kw-2'>&amp;</span><span class='ident'>Details</span> {
+         <span class='ident'>what</span>: <span class='string'>&quot;Server fire&quot;</span>,
+         <span class='ident'>count</span>: <span class='number'>1</span>,
+    });
+</pre>
+</div><h4 id='method.add_context' class='method'><code>fn <a href='#method.add_context' class='fnname'>add_context</a>(self, context: <a class='struct' href='../../pagerduty/integrations/struct.Context.html' title='pagerduty::integrations::Context'>Context</a>&lt;'a&gt;) -&gt; Self</code></h4>
+<div class='docblock'><p>Add a Context to this event</p>
+
+<p>Contexts to be included with the incident trigger such as links to graphs or images. A
+&quot;type&quot; is required for each context submitted. For type &quot;link&quot;, an &quot;href&quot; is required. You
+may optionally specify &quot;text&quot; with more information about the link. For type &quot;image&quot;, &quot;src&quot;
+must be specified with the image src. You may optionally specify an &quot;href&quot; or an &quot;alt&quot; with
+this image.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='../../serde/ser/trait.Serialize.html' title='serde::ser::Serialize'>Serialize</a> for <a class='struct' href='../../pagerduty/integrations/struct.TriggerEvent.html' title='pagerduty::integrations::TriggerEvent'>TriggerEvent</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.serialize' class='method'><code>fn <a href='../../serde/ser/trait.Serialize.html#method.serialize' class='fnname'>serialize</a>&lt;__S&gt;(&amp;self, serializer: &amp;mut __S) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, __S::Error&gt; <span class='where'>where __S: <a class='trait' href='../../serde/ser/trait.Serializer.html' title='serde::ser::Serializer'>Serializer</a></span></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../pagerduty/integrations/struct.TriggerEvent.html' title='pagerduty::integrations::TriggerEvent'>TriggerEvent</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "pagerduty";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

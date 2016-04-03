@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `pagerduty` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, pagerduty">
+
+    <title>pagerduty - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'pagerduty', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>pagerduty</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/pagerduty/src/lib.rs.html#1-61' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Unofficial PagerDuty API Client</p>
+
+<p>The code for this project resides at <a href="https://github.com/jwilm/pagerduty-rs">https://github.com/jwilm/pagerduty-rs</a>.</p>
+
+<p>This is an early version of the PagerDuty API Client. Many of the APIs are not yet implemented
+in this client. The initial features implemented are those necessary to create new incidents
+from a monitoring service. Furthemore, this library only works on Rust <em>nightlies</em> at the
+moment; we are using the Serde library for handling JSON serialization and make extensive use of
+the automatically derived <code>De/Serialize</code> implementations.</p>
+
+<h1 id='support' class='section-header'><a href='#support'>Support</a></h1>
+<p>The following APIs are <strong>supported</strong></p>
+
+<ul>
+<li>Integration API</li>
+</ul>
+
+<p>The following APIs are <strong>unsupported</strong></p>
+
+<ul>
+<li>Alerts</li>
+<li>Escalation Policies</li>
+<li>Incidents</li>
+<li>Log Entries</li>
+<li>Maintenance Windows</li>
+<li>Reports</li>
+<li>Schedules</li>
+<li>Services</li>
+<li>Users</li>
+<li>Teams</li>
+</ul>
+
+<p>Additionally, the following features are unsupported</p>
+
+<ul>
+<li>Webhooks</li>
+</ul>
+
+<p>If you are interested in using this library and the feature you want is not yet implemented,
+please file an issue on this project&#39;s repository. Features will be implemented on a
+most-in-demand basis.</p>
+
+<h1 id='tips' class='section-header'><a href='#tips'>Tips</a></h1>
+<p>There are a few things to know that might ease getting started with this library.</p>
+
+<ul>
+<li>Request types store string values as <code>Cow&lt;&#39;a, str&gt;</code>, and setters for these properties accept
+<code>Into&lt;Cow&lt;&#39;a, str&gt;&gt;</code> to keep the API ergononmic.</li>
+<li>Parts of the API (specifically, integration event <code>set_details</code>) let you provide arbitrary
+data with the request. Any structured type that implements <code>Serialize</code> can be used in these
+cases. There&#39;s currently no enforcement of the <em>structured</em> part of that contract. If you do not
+uphold that constaint, you will probably get a <code>BadRequest</code> response.</li>
+</ul>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='integration/index.html'
+                               title='pagerduty::integration'>integration</a></td>
+                        <td class='docblock short'>
+                             <p>Integration API</p>
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.AuthToken.html'
+                               title='pagerduty::AuthToken'>AuthToken</a></td>
+                        <td class='docblock short'>
+                             <p>A token used to authorize requests to PagerDuty.</p>
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "pagerduty";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

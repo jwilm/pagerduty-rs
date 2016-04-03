@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Source to the Rust file `src/lib.rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang">
+
+    <title>lib.rs.html -- source</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
+<span id="2"> 2</span>
+<span id="3"> 3</span>
+<span id="4"> 4</span>
+<span id="5"> 5</span>
+<span id="6"> 6</span>
+<span id="7"> 7</span>
+<span id="8"> 8</span>
+<span id="9"> 9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+</pre><pre class='rust '>
+<span class='doccomment'>//! Unofficial PagerDuty API Client</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! The code for this project resides at https://github.com/jwilm/pagerduty-rs.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! This is an early version of the PagerDuty API Client. Many of the APIs are not yet implemented</span>
+<span class='doccomment'>//! in this client. The initial features implemented are those necessary to create new incidents</span>
+<span class='doccomment'>//! from a monitoring service. Furthemore, this library only works on Rust _nightlies_ at the</span>
+<span class='doccomment'>//! moment; we are using the Serde library for handling JSON serialization and make extensive use of</span>
+<span class='doccomment'>//! the automatically derived `De/Serialize` implementations.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Support</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! The following APIs are **supported**</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! * Integration API</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! The following APIs are **unsupported**</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! * Alerts</span>
+<span class='doccomment'>//! * Escalation Policies</span>
+<span class='doccomment'>//! * Incidents</span>
+<span class='doccomment'>//! * Log Entries</span>
+<span class='doccomment'>//! * Maintenance Windows</span>
+<span class='doccomment'>//! * Reports</span>
+<span class='doccomment'>//! * Schedules</span>
+<span class='doccomment'>//! * Services</span>
+<span class='doccomment'>//! * Users</span>
+<span class='doccomment'>//! * Teams</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Additionally, the following features are unsupported</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! * Webhooks</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! If you are interested in using this library and the feature you want is not yet implemented,</span>
+<span class='doccomment'>//! please file an issue on this project&#39;s repository. Features will be implemented on a</span>
+<span class='doccomment'>//! most-in-demand basis.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Tips</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! There are a few things to know that might ease getting started with this library.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! * Request types store string values as `Cow&lt;&#39;a, str&gt;`, and setters for these properties accept</span>
+<span class='doccomment'>//! `Into&lt;Cow&lt;&#39;a, str&gt;&gt;` to keep the API ergononmic.</span>
+<span class='doccomment'>//! * Parts of the API (specifically, integration event `set_details`) let you provide arbitrary</span>
+<span class='doccomment'>//! data with the request. Any structured type that implements `Serialize` can be used in these</span>
+<span class='doccomment'>//! cases. There&#39;s currently no enforcement of the _structured_ part of that contract. If you do not</span>
+<span class='doccomment'>//! uphold that constaint, you will probably get a `BadRequest` response.</span>
+<span class='doccomment'>//!</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>custom_derive</span>, <span class='ident'>plugin</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>plugin</span>(<span class='ident'>serde_macros</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>hyper</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde_json</span>;
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>integration</span>;
+
+<span class='kw'>mod</span> <span class='ident'>auth</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>auth</span>::<span class='op'>*</span>;
+
+<span class='kw'>mod</span> <span class='ident'>request</span>;
+</pre>
+</section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "pagerduty";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>
