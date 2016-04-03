@@ -12,3 +12,6 @@ hyper = "0.8"
 serde = "0.7"
 serde_json = "0.7"
 serde_macros = "0.7"
+
+[features]
+live_tests = []
