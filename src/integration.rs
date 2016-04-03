@@ -201,7 +201,7 @@ impl<'a> TriggerEvent<'a> {
 ///
 /// In the case that Context is an image, it must have a `src` attribute and may optionally have an
 /// `href` and `alt` attributes. In the case of a link, context must have `href` and may optionally
-/// include `text. To enforce these invariants, all of the fields are kept private, and all of the
+/// include `text`. To enforce these invariants, all of the fields are kept private, and all of the
 /// properties must be specifed at once using the `link` and `image` methods.
 #[derive(Debug, Serialize)]
 pub struct Context<'a> {
