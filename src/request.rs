@@ -1,3 +1,7 @@
+//! Utilities for making HTTP requests
+//!
+//! Currently just wraps Hyper. Other parts of the library assume hyper to some extent since they
+//! reference the all but ubiquitous hyper::header module.
 use std::borrow::Cow;
 use std::io::{self, Read};
 
@@ -110,8 +114,10 @@ impl From<io::Error> for Error {
     }
 }
 
+/// A result from making a request
 pub type Result<T> = ::std::result::Result<T, Error>;
 
+/// Perform an HTTP request given a Requestable
 pub fn perform<R>(auth: &AuthToken, requestable: &R) -> Result<R::Response>
     where R: Requestable
 {
