@@ -149,11 +149,11 @@ impl<'a> TriggerEvent<'a> {
     ///
     /// # Examples
     /// ```no_run
-    /// # #![feature(custom_derive, plugin)]
-    /// # #![plugin(serde_macros)]
     /// #
     /// # extern crate serde;
     /// # extern crate pagerduty;
+    /// # #[macro_use]
+    /// # extern crate serde_derive;
     /// #
     /// # use pagerduty::integration::TriggerEvent;
     /// // Extra data to be included with the event. Anything that implements
@@ -174,10 +174,12 @@ impl<'a> TriggerEvent<'a> {
     /// # }
     ///
     /// ```
+    /// # Panics
+    /// Panics if `serde_json::to_value` on details type returns an error.
     pub fn set_details<T: ?Sized>(mut self, details: &T) -> Self
         where T: Serialize
     {
-        self.details = Some(to_value(details));
+        self.details = Some(to_value(details).unwrap());
         self
     }
 
@@ -300,10 +302,13 @@ macro_rules! shared_event_type {
             ///
             /// For an example, please see the similar
             /// [`TriggerEvent::set_details`](struct.TriggerEvent.html#method.set_details).
+            ///
+            /// # Panics
+            /// Panics if `serde_json::to_value` on details type returns an error.
             pub fn set_details<T: ?Sized>(mut self, details: &T) -> Self
                 where T: Serialize
             {
-                self.details = Some(to_value(details));
+                self.details = Some(to_value(details).unwrap());
                 self
             }
 
@@ -537,7 +542,6 @@ mod tests {
     }
 }
 
-#[cfg(feature = "live_tests")]
 mod live_tests {
     use AuthToken;
 

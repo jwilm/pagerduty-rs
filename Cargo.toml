@@ -10,9 +10,6 @@ documentation = "https://jwilm.github.io/pagerduty-rs/pagerduty/"
 
 [dependencies]
 hyper = "0.8"
-serde = "0.7"
-serde_json = "0.7"
-serde_macros = "0.7"
-
-[features]
-live_tests = []
+serde = "1"
+serde_json = "1"
+serde_derive = "1"

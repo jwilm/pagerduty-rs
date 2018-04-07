@@ -5,7 +5,7 @@
 use std::borrow::Cow;
 use std::io::{self, Read};
 
-use hyper::header::{self, Headers};
+use hyper::header::{self, Headers, UserAgent};
 use hyper::method::Method;
 use hyper::status::StatusCode;
 use hyper;
@@ -129,7 +129,7 @@ pub fn perform<R>(auth: &AuthToken, requestable: &R) -> Result<R::Response>
 
     // Add default headers
     headers.set(auth.to_header());
-    headers.set(header::UserAgent("hyper/0.8.0 pagerduty-rs/0.1.0".into()));
+    headers.set(UserAgent("hyper/0.8.0 pagerduty-rs/0.1.0".to_owned()));
     headers.set(header::ContentType::json());
 
     let mut res = try!(client.request(requestable.method(), requestable.url().as_ref())
