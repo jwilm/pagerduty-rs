@@ -46,8 +46,8 @@
 //! cases. There's currently no enforcement of the _structured_ part of that contract. If you do not
 //! uphold that constaint, you will probably get a `BadRequest` response.
 //!
-#![feature(custom_derive, plugin)]
-#![plugin(serde_macros)]
+#[macro_use]
+extern crate serde_derive;
 
 extern crate hyper;
 extern crate serde;
